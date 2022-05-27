@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
     private Animator anim;
+    private PlayerMovement playerMove;
+    private Boss1Patrol boss1Patrol;
+    private Boss1 boss1;
     // to make sure die animation doesnt play twice
     private bool dead;
 
@@ -20,6 +23,10 @@ public class Health : MonoBehaviour
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
+        playerMove = GetComponent<PlayerMovement>();
+        boss1Patrol = GetComponentInParent<Boss1Patrol>();
+        boss1 = GetComponent<Boss1>();
+
     }
 
     public void TakeDamage(float dmg)
@@ -30,7 +37,11 @@ public class Health : MonoBehaviour
         {
             //player hurt
             anim.SetTrigger("hurt");
-            StartCoroutine(Invuln());
+            if (playerMove != null)
+            {
+                StartCoroutine(Invuln());
+            }
+            
         }
         else
         {
@@ -38,20 +49,30 @@ public class Health : MonoBehaviour
             if (!dead)
             {
                 anim.SetTrigger("die");
-                GetComponent<PlayerMovement>().enabled = false;
+               
+                if (playerMove != null)
+                {
+                    //disable player movement when dead
+                    playerMove.enabled = false;
+                }
+
+                if (boss1Patrol != null)
+                {
+                    //disable boss movement when dead
+                    Destroy(boss1Patrol);
+                }
+
+                if (boss1 != null)
+                {
+                    Destroy(boss1);
+                }
+                
                 dead = true;
             }
             
         }
     }
 
-    //public void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        TakeDamage(1);
-    //    }
-    //}
 
     private IEnumerator Invuln()
     {

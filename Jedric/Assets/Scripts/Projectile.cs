@@ -35,6 +35,10 @@ public class Projectile : MonoBehaviour
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("collide");
+
+        // damaging bosses
+        if (collision.tag == "Enemy")
+            collision.GetComponent<Health>().TakeDamage(1);
     }
 
     public void SetDirection(float dir)
