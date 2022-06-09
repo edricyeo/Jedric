@@ -8,8 +8,9 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; }
     private Animator anim;
     private PlayerMovement playerMove;
-    private Boss1Patrol boss1Patrol;
     private Boss1 boss1;
+    // to update healthbar
+    public bool changeHealth = false;
     // to make sure die animation doesnt play twice
     private bool dead;
 
@@ -24,7 +25,6 @@ public class Health : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
         playerMove = GetComponent<PlayerMovement>();
-        boss1Patrol = GetComponentInParent<Boss1Patrol>();
         boss1 = GetComponent<Boss1>();
 
     }
@@ -32,16 +32,15 @@ public class Health : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, startingHealth);
-
         if (currentHealth > 0)
         {
             //player hurt
             anim.SetTrigger("hurt");
+            changeHealth = true;
             if (playerMove != null)
             {
                 StartCoroutine(Invuln());
             }
-            
         }
         else
         {
@@ -49,27 +48,17 @@ public class Health : MonoBehaviour
             if (!dead)
             {
                 anim.SetTrigger("die");
-               
                 if (playerMove != null)
                 {
                     //disable player movement when dead
                     playerMove.enabled = false;
                 }
-
-                if (boss1Patrol != null)
-                {
-                    //disable boss movement when dead
-                    Destroy(boss1Patrol);
-                }
-
                 if (boss1 != null)
                 {
                     Destroy(boss1);
                 }
-                
                 dead = true;
             }
-            
         }
     }
 

@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
         transform.Translate(bulletSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
-        if(lifetime > 3)
+        if(lifetime > 1)
         {
             gameObject.SetActive(false);
         }
@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
         anim.SetTrigger("collide");
 
         // damaging bosses
-        if (collision.tag == "Enemy")
+        if (collision.CompareTag("Enemy"))
             collision.GetComponent<Health>().TakeDamage(1);
     }
 
