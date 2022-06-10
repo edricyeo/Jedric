@@ -6,11 +6,10 @@ public class Health : MonoBehaviour
     [Header ("Health")]
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
+    public Healthbar healthBar;
     private Animator anim;
     private PlayerMovement playerMove;
     private Boss1 boss1;
-    // to update healthbar
-    public bool changeHealth = false;
     // to make sure die animation doesnt play twice
     private bool dead;
 
@@ -31,12 +30,13 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, startingHealth);
+        healthBar.ChangeHealth();
         if (currentHealth > 0)
         {
             //player hurt
             anim.SetTrigger("hurt");
-            changeHealth = true;
             if (playerMove != null)
             {
                 StartCoroutine(Invuln());
