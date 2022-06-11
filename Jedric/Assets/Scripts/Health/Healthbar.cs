@@ -3,19 +3,21 @@ using UnityEngine.UI;
 
 public class Healthbar : MonoBehaviour
 {
-    [SerializeField] private Health health;
+    [SerializeField] private Health playerHealth;
     [SerializeField] private Image totalhealthBar;
     [SerializeField] private Image currenthealthBar;
 
     private void Start()
     {
-        totalhealthBar.fillAmount = health.currentHealth / 10;
-        currenthealthBar.fillAmount = health.currentHealth / 10;
+        totalhealthBar.fillAmount = playerHealth.currentHealth / 10;
     }
 
-
-    public void ChangeHealth()
+    private void Update()
     {
-        currenthealthBar.fillAmount = health.currentHealth / 10;
+        if (playerHealth.changeHealth == true)
+        {
+            currenthealthBar.fillAmount = playerHealth.currentHealth / 10;
+            playerHealth.changeHealth = false;
+        }
     }
 }
