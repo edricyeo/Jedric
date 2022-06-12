@@ -18,12 +18,13 @@ public class Boss1 : MonoBehaviour
     [Header("Player Parameters")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform player;
+    [SerializeField] private Health playerHealth;
 
     private float cooldownTimer = Mathf.Infinity;
 
     private Animator anim;
     private Vector3 initialScale;
-    private Health playerHealth;
+    
 
     void Awake()
     {
