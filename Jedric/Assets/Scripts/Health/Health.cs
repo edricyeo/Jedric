@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [Header ("Health")]
+    [Header ("Health Parameters")]
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
     [SerializeField] private Healthbar healthbar;
+
     private Animator anim;
     private PlayerMovement playerMove;
-    
     private Boss1 boss1;
+
     // to make sure die animation doesnt play twice
     private bool dead;
 
@@ -52,10 +53,11 @@ public class Health : MonoBehaviour
                 {
                     //disable player movement when dead
                     playerMove.enabled = false;
+                    Destroy(gameObject);
                 }
                 if (boss1 != null)
                 {
-                    Destroy(boss1);
+                    Destroy(gameObject);
                 }
                 dead = true;
             }

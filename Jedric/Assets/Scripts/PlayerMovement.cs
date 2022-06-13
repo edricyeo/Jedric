@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement Parameters")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
+    private float wallJumpCooldown;
+    private float horizontalInput;
+
+    [Header("Layer References")]
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+
     private Rigidbody2D body;
     private Animator anim;
     private BoxCollider2D boxCollider;
-    private float wallJumpCooldown;
-    private float horizontalInput;
+    
 
     private void Awake()
     {
@@ -95,4 +101,10 @@ public class PlayerMovement : MonoBehaviour
     {
         return IsGrounded() && !OnWall();
     }
+
+    public bool CanDash()
+    {
+        return IsGrounded() && !OnWall() && Input.GetKey(KeyCode.D);
+    }
+
 }
