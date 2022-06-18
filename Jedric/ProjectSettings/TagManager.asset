@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Wall
   - Enemy
+  - Portal
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Wall
   - Player
   - Enemy
-  - 
+  - Portal
   - 
   - 
   - 
@@ -58,4 +59,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2190054393
+    locked: 0
+  - name: Portal
+    uniqueID: 3370256111
     locked: 0
