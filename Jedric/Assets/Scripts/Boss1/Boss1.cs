@@ -11,6 +11,7 @@ public class Boss1 : MonoBehaviour
     [SerializeField] private float atkRange;
     [SerializeField] private float colliderDistance;
     [SerializeField] private int damage;
+    private float cooldownTimer = Mathf.Infinity;
 
     [Header("Collider Parameters")]
     [SerializeField] private BoxCollider2D boxCollider;
@@ -19,8 +20,6 @@ public class Boss1 : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform player;
     [SerializeField] private Health playerHealth;
-
-    private float cooldownTimer = Mathf.Infinity;
 
     private Animator anim;
     private Vector3 initialScale;
