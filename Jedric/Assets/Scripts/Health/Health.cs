@@ -11,9 +11,13 @@ public class Health : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMove;
     private Boss1 boss1;
-
+    
     // to make sure die animation doesnt play twice
     private bool dead;
+
+    // bad implementation of reference to portal
+    [SerializeField] private Portal portal;
+
 
     [Header("iFrames")]
     [SerializeField] private float iFramesDuration;
@@ -58,6 +62,9 @@ public class Health : MonoBehaviour
                 if (boss1 != null)
                 {
                     Destroy(gameObject);
+                    //open portal
+                    portal.OpenPortal();
+                    //powerup player
                 }
                 dead = true;
             }

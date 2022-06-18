@@ -10484,9 +10484,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -908544425
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -10783,14 +10783,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0721cf1fdf18c432299b257a2da1698d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpd: 0
+  agroRange: 0
   attackCooldown: 1
-  range: 2
+  atkRange: 0
   colliderDistance: 1
   damage: 1
   boxCollider: {fileID: 3071718307299753556}
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  player: {fileID: 0}
+  playerHealth: {fileID: 0}
 --- !u!114 &3071718307299753578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10804,6 +10808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
+  healthbar: {fileID: 0}
+  portal: {fileID: 0}
   iFramesDuration: 0
   numOfFlashes: 0
 --- !u!1 &6891043206045282226
@@ -15751,9 +15757,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -908544425
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 2
@@ -20643,9 +20649,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -908544425
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_RenderMode: 1
   m_MeshDistribution: 0
   m_SortMode: 0
