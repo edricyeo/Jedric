@@ -6,7 +6,6 @@ public class Health : MonoBehaviour
     [Header ("Health Parameters")]
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
-    [SerializeField] private Healthbar healthbar;
 
     private Animator anim;
     private PlayerMovement playerMove;
@@ -15,14 +14,16 @@ public class Health : MonoBehaviour
     // to make sure die animation doesnt play twice
     private bool dead;
 
-    // bad implementation of reference to portal
-    [SerializeField] private Portal portal;
-
-
     [Header("iFrames")]
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numOfFlashes;
     private SpriteRenderer spriteRend;
+
+    public delegate void HealthChange();
+    public HealthChange HealthChangeEvent;
+
+    public delegate void BossDeath();
+    public static BossDeath BossDeathEvent;
 
     private void Awake()
     {
@@ -37,7 +38,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, startingHealth);
-        healthbar.ChangeHealth();
+        HealthChangeEvent.Invoke();
+
         if (currentHealth > 0)
         {
             //player hurt
@@ -46,28 +48,23 @@ public class Health : MonoBehaviour
             {
                 StartCoroutine(Invuln());
             }
+
         }
-        else
+        else if (!dead)
         {
             //player dead
-            if (!dead)
+            anim.SetTrigger("die");
+            if (playerMove != null)
             {
-                anim.SetTrigger("die");
-                if (playerMove != null)
-                {
-                    //disable player movement when dead
-                    playerMove.enabled = false;
-                    Destroy(gameObject);
-                }
-                if (boss1 != null)
-                {
-                    Destroy(gameObject);
-                    //open portal
-                    portal.OpenPortal();
-                    //powerup player
-                }
-                dead = true;
+                playerMove.enabled = false;
+                Destroy(gameObject);
             }
+            if (boss1 != null)
+            {
+                Destroy(gameObject);
+                BossDeathEvent.Invoke();
+            }
+            dead = true;
         }
     }
 

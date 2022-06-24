@@ -11,7 +11,6 @@ public class Boss1 : MonoBehaviour
     [SerializeField] private float atkRange;
     [SerializeField] private float colliderDistance;
     [SerializeField] private int damage;
-    private float cooldownTimer = Mathf.Infinity;
 
     [Header("Collider Parameters")]
     [SerializeField] private BoxCollider2D boxCollider;
@@ -20,6 +19,8 @@ public class Boss1 : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform player;
     [SerializeField] private Health playerHealth;
+
+    private float cooldownTimer = Mathf.Infinity;
 
     private Animator anim;
     private Vector3 initialScale;
@@ -34,7 +35,7 @@ public class Boss1 : MonoBehaviour
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
-
+        
         if (PlayerInSight()) { 
             //Attack only when player in sight
             if (cooldownTimer >= attackCooldown)
@@ -44,16 +45,19 @@ public class Boss1 : MonoBehaviour
                 anim.SetTrigger("attack02");
             }
         }
-
-        float distToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distToPlayer < agroRange)
+        if (player != null)
         {
-            ChasePlayer();
+            float distToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distToPlayer < agroRange)
+            {
+                ChasePlayer();
+            }
+            else
+            {
+                StopChasingPlayer();
+            }
         }
-        else
-        {
-            StopChasingPlayer();
-        }
+        
     }
 
     private bool PlayerInSight()
@@ -82,6 +86,7 @@ public class Boss1 : MonoBehaviour
         // Make boss face direction
         transform.localScale = new Vector3(-Mathf.Abs(initialScale.x) * dir, initialScale.y, initialScale.z);
         // Make boss move in that direction
+        // anim.SetBool("walk", true);
         transform.position = new Vector3(transform.position.x + Time.deltaTime * dir * moveSpd, transform.position.y, transform.position.z);
     }
 
@@ -111,5 +116,6 @@ public class Boss1 : MonoBehaviour
     private void StopChasingPlayer()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        // anim.SetBool("walk", false);
     }
 }

@@ -10,6 +10,7 @@ public class Healthbar : MonoBehaviour
     private void Start()
     {
         totalhealthBar.fillAmount = health.currentHealth / 10;
+        health.HealthChangeEvent += ChangeHealth;
     }
 
 

@@ -14,6 +14,8 @@ public class PlayerDash : MonoBehaviour
     private float dashCdTimer;
     public bool isDashing = false;
 
+    public ParticleSystem dust;
+
     private void Start()
     {
         Health.BossDeathEvent += ToggleDash;
@@ -27,6 +29,7 @@ public class PlayerDash : MonoBehaviour
             {
                 if (dashCdTimer <= 0 && dashDurationTimer <= 0)
                 {
+                    CreateDust();
                     playerMove.speed *= dashMultiplier;
                     isDashing = true;
                     dashDurationTimer = dashDuration;
@@ -59,11 +62,16 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    void ToggleDash()
+    public void ToggleDash()
     {
         if (dashEnabled == false)
         {
             dashEnabled = true;
         }
+    }
+
+    public void CreateDust()
+    {
+        dust.Play();
     }
 }
