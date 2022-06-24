@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
 
     [SerializeField] private PlayerDash playerDash;
-
+    [SerializeField] private AudioClip jumpSound;
     public static PlayerMovement instance;
 
     private void Awake()
@@ -74,7 +74,14 @@ public class PlayerMovement : MonoBehaviour
             
 
             if (Input.GetKey(KeyCode.UpArrow))
+            {
                 Jump();
+                if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded())
+                {
+                    SoundManager.instance.PlaySound(jumpSound);
+                }
+            }
+                
         }
         else
             wallJumpCooldown += Time.deltaTime;

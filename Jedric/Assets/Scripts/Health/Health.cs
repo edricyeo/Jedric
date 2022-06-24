@@ -25,6 +25,8 @@ public class Health : MonoBehaviour
     public delegate void BossDeath();
     public static BossDeath BossDeathEvent;
 
+    [SerializeField] private AudioClip hurtSound;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -32,13 +34,13 @@ public class Health : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
         playerMove = GetComponent<PlayerMovement>();
         boss1 = GetComponent<Boss1>();
-
     }
 
     public void TakeDamage(float dmg)
     {
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, startingHealth);
         HealthChangeEvent.Invoke();
+        SoundManager.instance.PlaySound(hurtSound);
 
         if (currentHealth > 0)
         {
