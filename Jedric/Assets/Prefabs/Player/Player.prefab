@@ -208,6 +208,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  bulletSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
 --- !u!114 &4092490858094838300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +227,7 @@ MonoBehaviour:
   dashCooldown: 1
   isDashing: 0
   dust: {fileID: 2274006243918085195}
+  dashSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
 --- !u!114 &2919856346368723671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +243,7 @@ MonoBehaviour:
   startingHealth: 3
   iFramesDuration: 1
   numOfFlashes: 2
+  hurtSound: {fileID: 8300000, guid: 416cf5d5778b745fc91be5843ea8596a, type: 3}
 --- !u!1 &2919856347415491755
 GameObject:
   m_ObjectHideFlags: 0

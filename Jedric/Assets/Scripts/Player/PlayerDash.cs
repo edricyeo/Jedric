@@ -15,6 +15,7 @@ public class PlayerDash : MonoBehaviour
     public bool isDashing = false;
 
     public ParticleSystem dust;
+    [SerializeField] private AudioClip dashSound;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerDash : MonoBehaviour
                 if (dashCdTimer <= 0 && dashDurationTimer <= 0)
                 {
                     CreateDust();
+                    SoundManager.instance.PlaySound(dashSound);
                     playerMove.speed *= dashMultiplier;
                     isDashing = true;
                     dashDurationTimer = dashDuration;
