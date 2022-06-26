@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        
     }
 
     private void Start()
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
 
         // flip player when moving left-right: +ve when facing left, -ve when facing right
         if (horizontalInput < -0.01f)
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
 
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.Space))
             {
                 Jump();
                 if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded())
@@ -121,10 +122,5 @@ public class PlayerMovement : MonoBehaviour
     private bool OnWall()
     {
         return Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(-transform.localScale.x, 0), 0.1f, wallLayer);
-    }
-
-    public bool CanAttack()
-    {
-        return IsGrounded() && !OnWall();
     }
 }

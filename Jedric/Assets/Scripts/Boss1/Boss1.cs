@@ -4,118 +4,77 @@ using UnityEngine;
 
 public class Boss1 : MonoBehaviour
 {
-    [Header("Attack Parameters")]
-    [SerializeField] private float moveSpd;
-    [SerializeField] private float agroRange;
+    [Header ("Attack Parameters")]
     [SerializeField] private float attackCooldown;
-    [SerializeField] private float atkRange;
-    [SerializeField] private float colliderDistance;
-    [SerializeField] private int damage;
+    [SerializeField] private float range;
 
-    [Header("Collider Parameters")]
+    [Header ("Collider Parameters")]
     [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private float colliderDistance;
 
-    [Header("Player Parameters")]
+    [Header ("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private Transform player;
-    [SerializeField] private Health playerHealth;
-
-    private float cooldownTimer = Mathf.Infinity;
 
     private Animator anim;
-    private Vector3 initialScale;
-    
+    private float cooldownTimer = Mathf.Infinity;
+    private Health playerHealth;
+    private BossMovement bossMovement;
 
-    void Awake()
-    {
+    private void Awake() {
         anim = GetComponent<Animator>();
-        initialScale = transform.localScale;
+        bossMovement = GetComponentInParent<BossMovement>();
     }
 
-    private void Update()
-    {
+    private void Update() {
         cooldownTimer += Time.deltaTime;
-        
-        if (PlayerInSight()) { 
-            //Attack only when player in sight
-            if (cooldownTimer >= attackCooldown)
-            {
-                //attack
+
+        //Attack only when player in sight?
+        //Note that boss fight doesn't need this feature
+
+        /*
+        if (PlayerInSight()) {
+            if (cooldownTimer >= attackCooldown) {
                 cooldownTimer = 0;
-                anim.SetTrigger("attack02");
+                anim.SetTrigger("attack"); 
             }
         }
-        if (player != null)
-        {
-            float distToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distToPlayer < agroRange)
-            {
-                ChasePlayer();
-            }
-            else
-            {
-                StopChasingPlayer();
-            }
+
+        if (enemyPatrol != null) {
+            enemyPatrol.enabled = !PlayerInSight(); 
         }
         
+
+        if (cooldownTimer >= attackCooldown) {
+            anim.SetTrigger("attack");
+            //set coroutine to wait 
+            chargeAttack();
+        }
+        */
+
+
     }
 
-    private bool PlayerInSight()
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center - transform.right * atkRange * transform.localScale.x * colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * atkRange, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
+    private bool PlayerInSight() {
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * -transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y,  boxCollider.bounds.size.z),
             0, Vector2.left, 0, playerLayer);
-
-        if (hit.collider != null)
-        {
+        
+        if (hit.collider != null) {
             playerHealth = hit.transform.GetComponent<Health>();
+            Debug.Log(gameObject.name);
         }
-
         return hit.collider != null;
     }
 
-    private void OnDrawGizmos()
-    {
+    private void OnDrawGizmos() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(boxCollider.bounds.center - transform.right * atkRange * transform.localScale.x * colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * atkRange, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * -transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y,  boxCollider.bounds.size.z));    
     }
 
-    private void MoveInDirection(int dir)
-    {
-        // Make boss face direction
-        transform.localScale = new Vector3(-Mathf.Abs(initialScale.x) * dir, initialScale.y, initialScale.z);
-        // Make boss move in that direction
-        // anim.SetBool("walk", true);
-        transform.position = new Vector3(transform.position.x + Time.deltaTime * dir * moveSpd, transform.position.y, transform.position.z);
-    }
-
-    private void DamagePlayer()
-    {
-        if(PlayerInSight())
-        {
-            //Damage player
-            playerHealth.TakeDamage(damage);
+    private void DamagePlayer() {
+        if (PlayerInSight()) {
+            playerHealth.TakeDamage(1);
         }
-    }
-
-    private void ChasePlayer()
-    {
-        if (transform.position.x < player.position.x)
-        {
-            // enemy on left of player, move right
-            MoveInDirection(1);
-        }
-        else if (transform.position.x > player.position.x)
-        {
-            // enemy on right of player, move left
-            MoveInDirection(-1);
-        }
-    }
-
-    private void StopChasingPlayer()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        // anim.SetBool("walk", false);
     }
 }
