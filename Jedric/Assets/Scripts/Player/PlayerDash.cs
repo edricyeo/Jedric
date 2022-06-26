@@ -26,7 +26,7 @@ public class PlayerDash : MonoBehaviour
     {
         if (dashEnabled == true)
         {
-            if (Input.GetKeyDown(KeyCode.V))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 if (dashCdTimer <= 0 && dashDurationTimer <= 0)
                 {
