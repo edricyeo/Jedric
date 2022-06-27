@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
             if (playerMove != null)
             {
                 playerMove.enabled = false;
-                Destroy(gameObject);
+                
             }
             if (boss1 != null)
             {

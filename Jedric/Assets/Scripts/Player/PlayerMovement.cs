@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public float speed;
     [SerializeField] private float jumpPower;
+    [SerializeField] private float gravityVal;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     private Rigidbody2D body;
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
                 body.mass = 0;
             } else
             {
-                body.gravityScale = 1;
+                body.gravityScale = gravityVal;
                 body.mass = 1;
             }
             

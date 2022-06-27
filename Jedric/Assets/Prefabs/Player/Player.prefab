@@ -154,8 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d3fb52c5a774d5ba037f0b96ac9637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpPower: 7
+  speed: 8
+  jumpPower: 12
+  gravityVal: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -163,7 +164,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerDash: {fileID: 4092490858094838300}
-  jumpSound: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: e0e47eb38c86447f9848b8debde02cf9, type: 3}
 --- !u!95 &2919856346368723669
 Animator:
   serializedVersion: 4
@@ -223,9 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 2919856346368723666}
-  dashMultiplier: 6
+  dashMultiplier: 8
   dashEnabled: 0
-  dashDuration: 0.05
+  dashDuration: 0.1
   dashCooldown: 1
   isDashing: 0
   dust: {fileID: 2274006243918085195}
