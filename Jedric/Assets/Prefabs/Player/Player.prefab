@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpPower: 5
+  jumpPower: 7
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -163,6 +163,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerDash: {fileID: 4092490858094838300}
+  jumpSound: {fileID: 0}
 --- !u!95 &2919856346368723669
 Animator:
   serializedVersion: 4
@@ -222,8 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 2919856346368723666}
-  dashMultiplier: 10
-  dashDuration: 0.1
+  dashMultiplier: 6
+  dashEnabled: 0
+  dashDuration: 0.05
   dashCooldown: 1
   isDashing: 0
   dust: {fileID: 2274006243918085195}

@@ -49,6 +49,15 @@ public class Boss2 : MonoBehaviour
         bolts[FindBolt()].transform.position = firepoint.position;
         bolts[FindBolt()].GetComponent<EnemyProjectile>().ActivateProjectile();
     }
+
+/*
+code for raining projectiles
+- have 6 different firepoints 
+- randomly choose 6
+- for each bolt, set position to firepoint position
+- translate downwards
+*/
+
     private int FindBolt()
     {
         for (int i = 0; i < bolts.Length; i++)
