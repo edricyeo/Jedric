@@ -16,6 +16,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
+        Physics2D.IgnoreLayerCollision(11, 12, true);
     }
 
     public void ActivateProjectile()
@@ -29,7 +30,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (hit) return;
         float movementSpeed = speed * Time.deltaTime;
-        transform.Translate(movementSpeed, 0, 0);
+        transform.Translate(-movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
         if (lifetime > resetTime)
@@ -41,13 +42,9 @@ public class EnemyProjectile : MonoBehaviour
         hit = true;
         coll.enabled = false;
 
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Player"))
             collision.GetComponent<Health>().TakeDamage(1);
 
-        Deactivate(); //When this hits any object deactivate arrow
-    }
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); //When this hits any object deactivate arrow
     }
 }

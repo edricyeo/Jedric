@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2462397671899297788}
   - component: {fileID: 2462397671899297791}
   - component: {fileID: 3988961119728410677}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CrossBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
