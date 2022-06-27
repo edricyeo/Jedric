@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMove;
     private Boss1 boss1;
+    private Boss2 boss2;
     
     // to make sure die animation doesnt play twice
     private bool dead;
@@ -34,6 +35,7 @@ public class Health : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
         playerMove = GetComponent<PlayerMovement>();
         boss1 = GetComponent<Boss1>();
+        boss2 = GetComponent<Boss2>();
     }
 
     public void TakeDamage(float dmg)
@@ -65,6 +67,10 @@ public class Health : MonoBehaviour
             {
                 Destroy(gameObject);
                 BossDeathEvent.Invoke();
+            }
+            if (boss2 != null)
+            {
+                Destroy(gameObject);
             }
             dead = true;
         }

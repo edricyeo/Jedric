@@ -27,15 +27,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-        } else
-        {
-            instance.transform.position = this.transform.position;
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //} else
+        //{
+        //    instance.transform.position = this.transform.position;
+        //    Destroy(gameObject);
+        //}
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
