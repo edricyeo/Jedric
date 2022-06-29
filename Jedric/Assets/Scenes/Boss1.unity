@@ -9144,7 +9144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3071718307299753578, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: startingHealth
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3071718307299753578, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: iFramesDuration

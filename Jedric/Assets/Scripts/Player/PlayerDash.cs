@@ -47,11 +47,8 @@ public class PlayerDash : MonoBehaviour
                 {
                     // player stops dashing, set move speed back to normal
                     float originalSpeed = playerMove.speed /= dashMultiplier;
-                    
-                  
                     playerMove.speed = originalSpeed;
                     dashCdTimer = dashCooldown;
-
                     isDashing = false;
                 }
             }
