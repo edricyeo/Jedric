@@ -109,6 +109,8 @@ public class BossMovement : MonoBehaviour
     }
 
     private void Update() {
+        if (enemy == null) 
+            return;
         cooldownTimer += Time.deltaTime;
 
         if (cooldownTimer >= attackCooldown) {
