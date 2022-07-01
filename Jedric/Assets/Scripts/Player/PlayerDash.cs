@@ -19,7 +19,7 @@ public class PlayerDash : MonoBehaviour
 
     private void Start()
     {
-        Health.BossDeathEvent += ToggleDash;
+        BossHealth.BossDeathEvent += ToggleDash;
     }
 
     void Update()

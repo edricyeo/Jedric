@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2919856346368723669}
   - component: {fileID: 2919856346368723668}
   - component: {fileID: 4092490858094838300}
-  - component: {fileID: 2919856346368723671}
+  - component: {fileID: 414529121884160350}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -225,13 +225,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 2919856346368723666}
   dashMultiplier: 8
-  dashEnabled: 0
+  dashEnabled: 1
   dashDuration: 0.1
   dashCooldown: 1
   isDashing: 0
   dust: {fileID: 2274006243918085195}
   dashSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
---- !u!114 &2919856346368723671
+--- !u!114 &414529121884160350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,13 +240,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2919856346368723663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11118977e537c49fe97213927d37c692, type: 3}
+  m_Script: {fileID: 11500000, guid: 6de0e95b21ee84201bab200eb2f0ffa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 5
+  hurtSound: {fileID: 8300000, guid: 416cf5d5778b745fc91be5843ea8596a, type: 3}
   iFramesDuration: 1
   numOfFlashes: 2
-  hurtSound: {fileID: 8300000, guid: 416cf5d5778b745fc91be5843ea8596a, type: 3}
 --- !u!1 &2919856347415491755
 GameObject:
   m_ObjectHideFlags: 0

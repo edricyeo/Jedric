@@ -38,7 +38,7 @@ public class PlayerProjectile : MonoBehaviour
 
         // damaging bosses
         if (collision.CompareTag("Enemy"))
-            collision.GetComponent<Health>().TakeDamage(1);
+            collision.GetComponent<BossHealth>().TakeDamage(1);
     }
 
     public void SetDirection(float dir)
