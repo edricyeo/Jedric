@@ -5,91 +5,26 @@ public class Health : MonoBehaviour
 {
     [Header ("Health Parameters")]
     public float startingHealth;
-    public float currentHealth { get; private set; }
+    public float currentHealth; //{ get; protected set; }
+    protected bool dead = false;
 
-    private Animator anim;
-    private PlayerMovement playerMove;
-    private Boss1 boss1;
-    private Boss2 boss2;
-    
-    // to make sure die animation doesnt play twice
-    private bool dead;
-
-    [Header("iFrames")]
-    [SerializeField] private float iFramesDuration;
-    [SerializeField] private int numOfFlashes;
-    private SpriteRenderer spriteRend;
-
+    // Events and Delegates
     public delegate void HealthChange();
     public HealthChange HealthChangeEvent;
 
-    public delegate void BossDeath();
-    public static BossDeath BossDeathEvent;
+    // Sound
+    [SerializeField] protected AudioClip hurtSound;
 
-    [SerializeField] private AudioClip hurtSound;
-
-    private void Awake()
+    public virtual void Awake()
     {
         currentHealth = startingHealth;
-        anim = GetComponent<Animator>();
-        spriteRend = GetComponent<SpriteRenderer>();
-        playerMove = GetComponent<PlayerMovement>();
-        boss1 = GetComponent<Boss1>();
-        boss2 = GetComponent<Boss2>();
     }
 
-    public void TakeDamage(float dmg)
+    public virtual void TakeDamage(float dmg)
     {
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, startingHealth);
         HealthChangeEvent.Invoke();
         SoundManager.instance.PlaySound(hurtSound);
-
-        if (currentHealth > 0)
-        {
-            //player hurt
-            anim.SetTrigger("hurt");
-            if (playerMove != null)
-            {
-                StartCoroutine(Invuln());
-            }
-
-        }
-        else if (!dead)
-        {
-            //player dead
-            anim.SetTrigger("die");
-            if (playerMove != null)
-            {
-                playerMove.enabled = false;
-                
-            }
-            if (boss1 != null)
-            {
-                Destroy(gameObject);
-                BossDeathEvent.Invoke();
-            }
-            if (boss2 != null)
-            {
-                Destroy(gameObject);
-            }
-            dead = true;
-        }
     }
 
-
-    private IEnumerator Invuln()
-    {
-        //ignore collision between layer 8 (player) and 9 (enemy)
-        Physics2D.IgnoreLayerCollision(8, 9, true);
-        //invunerability duration
-        for (int i = 0; i < numOfFlashes; i++)
-        {
-            // make the sprite flash red and make it slightly transparent
-            spriteRend.color = new Color(1, 0, 0, 0.5f);
-            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
-            spriteRend.color = Color.white;
-            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
-        }
-        Physics2D.IgnoreLayerCollision(8, 9, false);
-    }
 }

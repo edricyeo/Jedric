@@ -17,7 +17,7 @@ public class Boss1 : EnemyDamage
 
     private Animator anim;
     private float cooldownTimer = Mathf.Infinity;
-    private Health playerHealth;
+    private PlayerHealth playerHealth;
     private BossMovement bossMovement;
 
     private void Awake() {
@@ -60,7 +60,7 @@ public class Boss1 : EnemyDamage
             0, Vector2.left, 0, playerLayer);
         
         if (hit.collider != null) {
-            playerHealth = hit.transform.GetComponent<Health>();
+            playerHealth = hit.transform.GetComponent<PlayerHealth>();
             Debug.Log(gameObject.name);
         }
         return hit.collider != null;
