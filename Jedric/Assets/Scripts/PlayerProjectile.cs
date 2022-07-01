@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class PlayerProjectile : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private float lifetime;
     private bool hit;
     private float direction;
-    private float lifetime;
 
     private BoxCollider2D boxCollider;
     private Animator anim;

@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
+public class Boss2Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float resetTime;
     private Animator anim;
     private BoxCollider2D coll;
 
