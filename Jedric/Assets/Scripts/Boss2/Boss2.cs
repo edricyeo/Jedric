@@ -47,7 +47,7 @@ public class Boss2 : MonoBehaviour
     {
         cooldownTimer = 0;
         bolts[FindBolt()].transform.position = firepoint.position;
-        bolts[FindBolt()].GetComponent<EnemyProjectile>().ActivateProjectile();
+        bolts[FindBolt()].GetComponent<Boss2Projectile>().ActivateProjectile();
     }
 
 /*

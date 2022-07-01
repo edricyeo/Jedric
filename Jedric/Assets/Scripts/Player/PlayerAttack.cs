@@ -32,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
         anim.SetTrigger("attack");
         // pooling bullets for better performance
         bullets[FindBullet()].transform.position = firePoint.position;
-        bullets[FindBullet()].GetComponent<Projectile>().SetDirection(-Mathf.Sign(transform.localScale.x));
+        bullets[FindBullet()].GetComponent<PlayerProjectile>().SetDirection(-Mathf.Sign(transform.localScale.x));
     }
 
     private int FindBullet()
