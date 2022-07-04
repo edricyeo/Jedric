@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
   public static GameManager instance = null;
   [SerializeField] private int sceneLimit;
+  [SerializeField] private Transform playerPrefab;
+  [SerializeField] private Transform spawnPoint;
 
   void Awake()
   {
@@ -21,6 +23,12 @@ public class GameManager : MonoBehaviour
       DontDestroyOnLoad(gameObject);
 
   }
+
+  public void RespawnPlayer() 
+  {
+    Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+  }
+
   void Update()
   {
     //Checks if build index is greater than ("#") 
