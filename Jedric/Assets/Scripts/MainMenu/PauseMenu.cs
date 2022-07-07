@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
+            Debug.Log("hdsjafh");
             if (GameIsPaused) {
                 Resume();
             } else {
@@ -19,7 +20,7 @@ public class PauseMenu : MonoBehaviour
         }        
     }
 
-    void Pause() {
+    public void Pause() {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
