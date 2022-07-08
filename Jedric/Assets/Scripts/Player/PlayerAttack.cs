@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.V) && cooldownTimer > attackCooldown)
+        if (Input.GetKey(KeyCode.Z) && cooldownTimer > attackCooldown)
             Attack();
 
         cooldownTimer += Time.deltaTime;

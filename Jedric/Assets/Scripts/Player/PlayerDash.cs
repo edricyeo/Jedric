@@ -7,9 +7,9 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private PlayerMovement playerMove;
 
     [SerializeField] private float dashMultiplier;
-    [SerializeField] private bool dashEnabled = false;
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
+    private bool dashEnabled = false;
     private float dashDurationTimer;
     private float dashCdTimer;
     public bool isDashing = false;
@@ -26,7 +26,7 @@ public class PlayerDash : MonoBehaviour
     {
         if (dashEnabled == true)
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.X))
             {
                 if (dashCdTimer <= 0 && dashDurationTimer <= 0)
                 {
