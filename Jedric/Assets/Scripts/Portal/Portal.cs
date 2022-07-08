@@ -11,7 +11,8 @@ public class Portal : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        DontDestroyOnLoad(gameObject);
         BossHealth.BossDeathEvent += OpenPortal;
         opened = false;
         portalClosed.SetActive(true);

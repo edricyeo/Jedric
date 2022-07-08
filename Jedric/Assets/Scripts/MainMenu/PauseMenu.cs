@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Debug.Log("hdsjafh");
             if (GameIsPaused) {
                 Resume();
             } else {
@@ -33,7 +33,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Retry() {
-        Debug.Log("Retry level");
+        Resume();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoToMainRoom() {

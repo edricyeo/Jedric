@@ -11,6 +11,8 @@ public class PlayerHealth : Health
     [SerializeField] private int numOfFlashes;
     private SpriteRenderer spriteRend;
 
+    [SerializeField] private GameObject postDeathMenu;
+
     public override void Awake()
     {
         base.Awake();
@@ -38,6 +40,7 @@ public class PlayerHealth : Health
             anim.SetTrigger("die");
             playerMove.enabled = false;
             gameObject.SetActive(false);
+            postDeathMenu.SetActive(true);
             base.dead = true;
         }
     }
