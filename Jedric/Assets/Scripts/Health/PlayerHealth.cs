@@ -49,6 +49,7 @@ public class PlayerHealth : Health
     {
         //ignore collision between layer 8 (player) and 9 (enemy)
         Physics2D.IgnoreLayerCollision(8, 9, true);
+        Physics2D.IgnoreLayerCollision(8, 12, true);
         //invunerability duration
         for (int i = 0; i < numOfFlashes; i++)
         {
@@ -59,6 +60,7 @@ public class PlayerHealth : Health
             yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
+        Physics2D.IgnoreLayerCollision(8, 12, false);
     }
 
 }

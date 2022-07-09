@@ -7,6 +7,8 @@ public class Boss2Projectile : MonoBehaviour
     [SerializeField] private float speed;
     private Animator anim;
     private BoxCollider2D coll;
+    private bool launched = false;
+    private bool rainAttack = false;
 
     private bool hit;
 
@@ -23,11 +25,28 @@ public class Boss2Projectile : MonoBehaviour
         gameObject.SetActive(true);
         coll.enabled = true;
     }
+
+    public void ToggleRainAttack() {
+        rainAttack = true;
+    }
+
+    public void LaunchProjectile() {
+        launched = true;
+    }
+
     private void Update()
     {
         if (hit) return;
         float movementSpeed = speed * Time.deltaTime;
-        transform.Translate(-movementSpeed, 0, 0);
+
+        if (launched) {
+            if (rainAttack) {
+                //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+                transform.Translate(-movementSpeed*2, 0, 0);
+            } else {
+                transform.Translate(-movementSpeed, 0, 0);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,6 +57,9 @@ public class Boss2Projectile : MonoBehaviour
         if (collision.CompareTag("Player"))
             collision.GetComponent<Health>().TakeDamage(1);
 
-        gameObject.SetActive(false); //When this hits any object deactivate arrow
+        gameObject.SetActive(false);
+        gameObject.transform.rotation = Quaternion.identity;
+        launched = false;
+        rainAttack = false;
     }
 }

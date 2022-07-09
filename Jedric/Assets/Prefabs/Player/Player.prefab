@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpPower: 12
+  jumpPower: 15
   gravityVal: 3
   groundLayer:
     serializedVersion: 2
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMove: {fileID: 2919856346368723666}
   dashMultiplier: 8
-  dashEnabled: 1
   dashDuration: 0.1
   dashCooldown: 1
   isDashing: 0
@@ -244,9 +243,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 5
+  currentHealth: 0
   hurtSound: {fileID: 8300000, guid: 416cf5d5778b745fc91be5843ea8596a, type: 3}
   iFramesDuration: 1
   numOfFlashes: 2
+  postDeathMenu: {fileID: 0}
 --- !u!1 &2919856347415491755
 GameObject:
   m_ObjectHideFlags: 0

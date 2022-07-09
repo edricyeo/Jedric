@@ -9,7 +9,9 @@ public class Boss2 : EnemyDamage
     [SerializeField] private float range;
 
     [Header("Ranged Attack")]
-    [SerializeField] private Transform firepoint;
+    [SerializeField] private Transform firepoint1;
+    [SerializeField] private Transform firepoint2;
+    [SerializeField] private Transform[] firepointArray;
     [SerializeField] private GameObject[] bolts;
 
     [Header("Collider Parameters")]
@@ -19,6 +21,11 @@ public class Boss2 : EnemyDamage
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
+
+    private enum Attack {ThreeConsec, AlternatingAttack, RainingAttack}
+    private int nextAttack;
+    private int excludedFirepoint;
+    private GameObject currentBolt;
 
     //References
     private Animator anim;
@@ -32,22 +39,67 @@ public class Boss2 : EnemyDamage
     {
         cooldownTimer += Time.deltaTime;
 
-        //Attack only when player in sight?
-        if (PlayerInSight())
+        if (cooldownTimer >= attackCooldown)
         {
-            if (cooldownTimer >= attackCooldown)
-            {
-                cooldownTimer = 0;
+            cooldownTimer = 0;
+            if (nextAttack == (int) Attack.ThreeConsec) {
                 anim.SetTrigger("attack02");
+            } else if (nextAttack == (int) Attack.AlternatingAttack) {
+                anim.SetTrigger("attack");
+            } else {
+                anim.SetTrigger("rainingAttack");
             }
+            nextAttack = Random.Range(0,3);
         }
     }
 
-    private void RangedAttack()
-    {
+    private void LowerAttack()
+    {   currentBolt = bolts[FindBolt()];
         cooldownTimer = 0;
-        bolts[FindBolt()].transform.position = firepoint.position;
-        bolts[FindBolt()].GetComponent<Boss2Projectile>().ActivateProjectile();
+        currentBolt.transform.position = firepoint1.position;
+        currentBolt.GetComponent<Boss2Projectile>().ActivateProjectile();
+        currentBolt.GetComponent<Boss2Projectile>().LaunchProjectile();
+    }
+
+    private void UpperAttack()
+    {
+        currentBolt = bolts[FindBolt()];
+        cooldownTimer = 0;
+        currentBolt.transform.position = firepoint2.position;
+        currentBolt.GetComponent<Boss2Projectile>().ActivateProjectile();
+        currentBolt.GetComponent<Boss2Projectile>().LaunchProjectile();
+    }
+/*
+idea for raining fireballs:
+1. store array of firepoints
+2. choose random index to not place a fireball
+for each firepoint in array
+    if index, ignore
+    else bolt.transform.position = firepoint position
+
+3. start coroutine to allow player to escape
+4. activate all projectiles
+*/
+    private void PlaceFireballs() {
+        excludedFirepoint = Random.Range(0, firepointArray.Length);
+        
+        for (int i = 0; i < firepointArray.Length; i++) {
+            currentBolt = bolts[FindBolt()];
+            if (excludedFirepoint != i) {
+                currentBolt.transform.Rotate(0, 0, 90.0f);
+                currentBolt.transform.position = firepointArray[i].position;
+                currentBolt.GetComponent<Boss2Projectile>().ToggleRainAttack();
+                currentBolt.GetComponent<Boss2Projectile>().ActivateProjectile();
+            }
+        }
+        StartCoroutine(AttackBuffer());
+    }
+
+    private IEnumerator AttackBuffer() {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < bolts.Length; i++)
+            if (bolts[i].activeInHierarchy)
+                bolts[i].GetComponent<Boss2Projectile>().LaunchProjectile();
     }
 
 /*
@@ -57,6 +109,14 @@ code for raining projectiles
 - for each bolt, set position to firepoint position
 - translate downwards
 */
+    private int FindActiveBolt() {
+    for (int i = 0; i < bolts.Length; i++)
+        {
+            if (bolts[i].activeInHierarchy)
+                return i;
+        }
+        return 0;
+    }
 
     private int FindBolt()
     {
