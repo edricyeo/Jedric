@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
   void Update()
   {
     //Checks if build index is greater than ("#") 
-    if (SceneManager.GetActiveScene ().buildIndex > sceneLimit)
+    if (SceneManager.GetActiveScene().buildIndex > sceneLimit)
     {
       Destroy(GameObject.FindWithTag("GameManager"));
     }
