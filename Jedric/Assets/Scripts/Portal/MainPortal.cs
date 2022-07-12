@@ -1,10 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BossPortal : MonoBehaviour
+public class MainPortal : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
     private bool inRange;
+    [SerializeField] private GameObject portal;
+
+    private void Awake()
+    {
+        BossHealth.BossDeathEvent += OpenPortal;
+        portal.SetActive(false);
+    }
+
+    private void OpenPortal()
+    {
+        if (portal != null)
+        {
+            portal.SetActive(true);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,16 +33,16 @@ public class BossPortal : MonoBehaviour
         inRange = false;
     }
 
-    private void PortToBoss()
+    private void PortToMain()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("MainRoom");
     }
 
     private void Update()
     {
         if (inRange && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            PortToBoss();
+            PortToMain();
         }
     }
 

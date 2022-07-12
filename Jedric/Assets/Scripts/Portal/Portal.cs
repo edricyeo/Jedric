@@ -1,39 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    private bool opened;
-    [SerializeField] private GameObject portalClosed;
-    [SerializeField] private GameObject portalOpen;
+    [SerializeField] private string sceneName;
+    [SerializeField] private GameObject portalObject;
+    private bool inRange;
 
-    // Start is called before the first frame update
-    void Start()
-    {   
-        DontDestroyOnLoad(gameObject);
-        BossHealth.BossDeathEvent += OpenPortal;
-        opened = false;
-        portalClosed.SetActive(true);
-        portalOpen.SetActive(false);
+    private void Awake()
+    {
+        // portal from boss room to main room
+        if (sceneName == "MainRoom")
+        {
+            BossHealth.BossDeathEvent += OpenPortal;
+            portalObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && opened == true)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // player runs to portal and boss is dead, go to next scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            inRange = true;
         }
     }
 
-    public void OpenPortal()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        portalClosed.SetActive(false);
-        portalOpen.SetActive(true);
-        opened = true;
+        inRange = false;
     }
 
-    
+    private void OpenPortal()
+    {
+        if (portalObject != null)
+        {
+            portalObject.SetActive(true);
+        }
+    }
+
+    private void PortPlayer()
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private void Update()
+    {
+        if (inRange && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            PortPlayer();
+        }
+    }
 }

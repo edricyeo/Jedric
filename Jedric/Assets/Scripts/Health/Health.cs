@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     [Header ("Health Parameters")]
     public float startingHealth;
     public float currentHealth; //{ get; protected set; }
-    protected bool dead = false;
+    protected bool dead;
 
     // Events and Delegates
     public delegate void HealthChange();
@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     public virtual void Awake()
     {
         currentHealth = startingHealth;
+        dead = false;
     }
 
     public virtual void TakeDamage(float dmg)
