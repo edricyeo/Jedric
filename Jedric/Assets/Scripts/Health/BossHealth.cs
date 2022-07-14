@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BossHealth : Health
 {
-    // need to generalize this to all boss classes subsequently
-    //[SerializeField] private GameObject dashInstructions;
+    [Header("Boss Parameters")]
+    [SerializeField] private GameObject powerUpInstructions;
     private Animator anim;
 
     public delegate void BossDeath();
@@ -16,18 +16,6 @@ public class BossHealth : Health
         
         anim = GetComponent<Animator>();
     }
-
-    private void Start()
-    {
-        //if (dashInstructions != null)
-        //{
-        //    BossHealth.BossDeathEvent += dashTutorial;
-        //}
-    }
-
-    //public void dashTutorial() {
-    //    dashInstructions.SetActive(true);
-    //}
 
     public override void TakeDamage(float dmg)
     {
@@ -44,6 +32,10 @@ public class BossHealth : Health
             gameObject.SetActive(false);
             BossDeathEvent.Invoke();
             base.dead = true;
+            if (powerUpInstructions != null)
+            {
+                powerUpInstructions.SetActive(true);
+            }
         }
     }
 }

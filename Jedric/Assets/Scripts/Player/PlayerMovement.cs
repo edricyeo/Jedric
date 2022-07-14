@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement Parameters")]
     [SerializeField] public float speed;
     [SerializeField] private float jumpPower;
     [SerializeField] private float gravityVal;
@@ -13,9 +14,19 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private float horizontalInput;
 
+    [Header("Player Dash")]
     [SerializeField] private PlayerDash playerDash;
+
+    [Header("Wall Jump")]
+    [SerializeField] private float wallJumpX;
+    [SerializeField] private float wallJumpY;
+
+    [Header("Double Jump")]
+    [SerializeField] private int extraJumps;
+    private int jumpCounter;
+
+    [Header("Sounds")]
     [SerializeField] private AudioClip jumpSound;
-    public static PlayerMovement instance;
 
     private void Awake()
     {
@@ -23,19 +34,6 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-    }
-
-    private void Start()
-    {
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //} else
-        //{
-        //    instance.transform.position = this.transform.position;
-        //    Destroy(gameObject);
-        //}
-        //DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -51,67 +49,55 @@ public class PlayerMovement : MonoBehaviour
         // set animator parameters
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("grounded", IsGrounded());
-
-        // wall jump logic
-        if (wallJumpCooldown > 0.2f)
+    
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            Jump();
+        }
 
+        if (OnWall())
+        {
+            body.gravityScale = 0;
+            body.velocity = Vector2.zero;
+        }
+        else 
+        {
+            body.gravityScale = gravityVal;
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (OnWall() && !IsGrounded())
+            if (IsGrounded())
             {
-                body.gravityScale = 0;
-                body.velocity = Vector2.zero;
-            }
-            else if (playerDash.isDashing == true)
-            {
-                body.gravityScale = 0;
-                body.mass = 0;
-            } else
-            {
-                body.gravityScale = gravityVal;
-                body.mass = 1;
-            }
-            
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Jump();
-                if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded())
-                {
-                    SoundManager.instance.PlaySound(jumpSound);
-                }
-            }
-                
+                jumpCounter = extraJumps;
+            } 
         }
-        else
-            wallJumpCooldown += Time.deltaTime;
+
+        wallJumpCooldown += Time.deltaTime;
     }
 
     private void Jump()
     {
+
         if (IsGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
-            anim.SetTrigger("jump");
         }
-        else if (OnWall() && !IsGrounded())
+        else if (!OnWall() && jumpCounter <= 0)
+            return;
+        else if (OnWall() && wallJumpCooldown > 0.2f)
+            WallJump();
+        else
         {
-
-            if (horizontalInput == 0)
-            {
-                body.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * speed, 3);
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else
-            {
-                body.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * speed, 6);
-            }
-
-            wallJumpCooldown = 0;
-
+            // double jump logic
+            body.velocity = new Vector2(body.velocity.x, jumpPower);
+            jumpCounter--;
         }
+        SoundManager.instance.PlaySound(jumpSound);
+    }
 
+    private void WallJump()
+    {
+        body.AddForce(new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
+        wallJumpCooldown = 0;
     }
 
     private bool IsGrounded()

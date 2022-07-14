@@ -9,7 +9,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private float dashMultiplier;
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
-    private bool dashEnabled = false;
+    [SerializeField] private bool dashEnabled = false;
     private float dashDurationTimer;
     private float dashCdTimer;
     public bool isDashing = false;

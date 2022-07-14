@@ -164,6 +164,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerDash: {fileID: 4092490858094838300}
+  wallJumpX: 1800
+  wallJumpY: 750
+  extraJumps: 1
   jumpSound: {fileID: 8300000, guid: e0e47eb38c86447f9848b8debde02cf9, type: 3}
 --- !u!95 &2919856346368723669
 Animator:
@@ -227,6 +230,7 @@ MonoBehaviour:
   dashMultiplier: 8
   dashDuration: 0.1
   dashCooldown: 1
+  dashEnabled: 0
   isDashing: 0
   dust: {fileID: 2274006243918085195}
   dashSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
