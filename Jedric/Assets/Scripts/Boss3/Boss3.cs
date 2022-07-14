@@ -8,6 +8,11 @@ public class Boss3 : EnemyDamage
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
 
+    [Header("Ranged Attack")]
+    [SerializeField] private Transform[] firepointArray;
+    [SerializeField] private GameObject[] bolts;
+    private GameObject currentBolt;
+
     [Header("Collider Parameters")]
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -22,6 +27,8 @@ public class Boss3 : EnemyDamage
     private Transform player;
     private RaycastHit2D hit;
     private Vector2 initScale;
+    private enum Attack {MeleeAttack, TripleShot}
+    private int nextAttack;
 
     private void Awake()
     {
@@ -37,8 +44,16 @@ public class Boss3 : EnemyDamage
 
         if (cooldownTimer >= attackCooldown)
         {
+            /*
+            if (nextAttack == (int) Attack.MeleeAttack) { 
+                anim.SetTrigger("Teleport");
+            } else if (nextAttack == (int) Attack.TripleShot) {
+                anim.SetTrigger("Cast");
+            }
+            */
+            anim.SetTrigger("Cast");
             cooldownTimer = 0;
-            anim.SetTrigger("Teleport");
+            nextAttack = Random.Range(1,2);
         }
     }
 
@@ -57,13 +72,52 @@ public class Boss3 : EnemyDamage
         anim.SetTrigger("Attack");
     }
 
+    private void PlaceBolts() {
+        
+        for (int i = 0; i < firepointArray.Length; i++) {
+            currentBolt = bolts[FindBolt()];
+            currentBolt.transform.position = firepointArray[i].position;
+            currentBolt.GetComponent<Boss3Projectile>().ActivateProjectile();
+        }
+        StartCoroutine(AttackBuffer());
+    }
+
+    private IEnumerator AttackBuffer() {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < bolts.Length; i++)
+        {
+            if (bolts[i].activeInHierarchy)
+                bolts[i].GetComponent<Boss3Projectile>().LaunchProjectile();
+            yield return new WaitForSeconds(1);
+        }
+    }
+
     private void DealDamage() {
         if (PlayerInSight()) {
             if (hit.collider.CompareTag("Player")) {
                 hit.collider.GetComponent<Health>().TakeDamage(1.0f);
             }
         }
-    }    
+    }
+
+    private int FindActiveBolt() {
+        for (int i = 0; i < bolts.Length; i++)
+            {
+                if (bolts[i].activeInHierarchy)
+                    return i;
+            }
+            return 0;
+    }
+
+    private int FindBolt()
+    {
+        for (int i = 0; i < bolts.Length; i++)
+        {
+            if (!bolts[i].activeInHierarchy)
+                return i;
+        }
+        return 0;
+    }
 
     private bool PlayerInSight()
     {

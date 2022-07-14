@@ -36,7 +36,7 @@ public class BossHealth : Health
         if (base.currentHealth > 0)
         {
             //boss hurt
-            anim.SetTrigger("hurt");
+            //anim.SetTrigger("hurt");
         }
         else if (!base.dead)
         {
