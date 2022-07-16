@@ -19,8 +19,11 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Boss3.unity
-    guid: 1d3c08bbb31194957a832c7cf3bc4def
+    guid: 9875a6deb7bf9d54d860641d7f9924eb
   - enabled: 1
     path: Assets/Scenes/Boss4.unity
     guid: 29828cbb81fc94f1594e9fea53e6f4b2
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 4d7dee06186a6496b9d953af7ffee0a2
   m_configObjects: {}

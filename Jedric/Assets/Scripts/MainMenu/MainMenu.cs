@@ -3,10 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void StartButton()
+    public void PlayButton()
     {
-        //Load the next scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //Load the play scene
+        SceneManager.LoadScene("MainRoom");
+    }
+
+    public void TutorialButton()
+    {
+        //Load the tutorial scene
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void QuitGame()

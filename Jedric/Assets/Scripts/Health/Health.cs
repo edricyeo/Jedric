@@ -24,7 +24,8 @@ public class Health : MonoBehaviour
     public virtual void TakeDamage(float dmg)
     {
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, startingHealth);
-        HealthChangeEvent.Invoke();
+        if (HealthChangeEvent != null)
+            HealthChangeEvent.Invoke();
         SoundManager.instance.PlaySound(hurtSound);
     }
 
