@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
   public static GameManager instance = null;
-  [SerializeField] private int sceneLimit;
+  public int progressLevel;
   [SerializeField] private Transform playerPrefab;
   [SerializeField] private Transform spawnPoint;
 
-  void Awake()
+  private void Awake()
   {
       if (instance == null)
       {
@@ -24,17 +24,18 @@ public class GameManager : MonoBehaviour
 
   }
 
-  public void RespawnPlayer() 
-  {
-    Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-  }
+  //public void RespawnPlayer() 
+  //{
+  //  Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+  //}
 
-  void Update()
-  {
-    //Checks if build index is greater than ("#") 
-    if (SceneManager.GetActiveScene().buildIndex > sceneLimit)
+    public void LoadData(GameData data)
     {
-      Destroy(GameObject.FindWithTag("GameManager"));
+        this.progressLevel = data.progressLevel;
     }
-  }
+
+    public void SaveData(GameData data)
+    {
+        data.progressLevel = this.progressLevel;
+    }
 }

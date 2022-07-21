@@ -17,10 +17,10 @@ public class PlayerDash : MonoBehaviour
     public ParticleSystem dust;
     [SerializeField] private AudioClip dashSound;
 
-    private void Start()
-    {
-        BossHealth.BossDeathEvent += ToggleDash;
-    }
+    //private void Start()
+    //{
+    //    BossHealth.BossDeathEvent += ToggleDash;
+    //}
 
     void Update()
     {

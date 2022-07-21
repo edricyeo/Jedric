@@ -14663,7 +14663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080ab62f92124389bf29249ea1e05da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLimit: 10
+  progressLevel: 0
   playerPrefab: {fileID: 1676695573}
   spawnPoint: {fileID: 0}
 --- !u!4 &1650329185
@@ -15880,6 +15880,10 @@ PrefabInstance:
       propertyPath: bullets.Array.data[9]
       value: 
       objectReference: {fileID: 1129400672}
+    - target: {fileID: 2919856347415491754, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.196
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
 --- !u!1001 &3071718307606623050
@@ -15892,6 +15896,10 @@ PrefabInstance:
     - target: {fileID: 540447514658233771, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3071718307299753557, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
+      propertyPath: player
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3071718307606623052, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: startingHealth

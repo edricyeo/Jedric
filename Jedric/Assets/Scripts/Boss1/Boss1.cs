@@ -14,67 +14,26 @@ public class Boss1 : EnemyDamage
 
     [Header ("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
-
-    private Animator anim;
-    private float cooldownTimer = Mathf.Infinity;
-    private PlayerHealth playerHealth;
-    private BossMovement bossMovement;
+    [SerializeField] private PlayerLevel player;
 
     private void Awake() {
-        anim = GetComponent<Animator>();
-        bossMovement = GetComponentInParent<BossMovement>();
+        //BossHealth.BossDeathEvent += LevelUpPlayer;
+        BossHealth.BossDeathEvent += IncreaseProgressLevel;
     }
 
-    private void Update() {
-        cooldownTimer += Time.deltaTime;
+    //private void LevelUpPlayer()
+    //{
+    //    if (player.level == 1)
+    //    {
+    //        player.LevelUp();
+    //    }
+    //}
 
-        //Attack only when player in sight?
-        //Note that boss fight doesn't need this feature
-
-        /*
-        if (PlayerInSight()) {
-            if (cooldownTimer >= attackCooldown) {
-                cooldownTimer = 0;
-                anim.SetTrigger("attack"); 
-            }
+    private void IncreaseProgressLevel()
+    {
+        if (GameManager.instance.progressLevel == 0)
+        {
+            GameManager.instance.progressLevel++;
         }
-
-        if (enemyPatrol != null) {
-            enemyPatrol.enabled = !PlayerInSight(); 
-        }
-        
-
-        if (cooldownTimer >= attackCooldown) {
-            anim.SetTrigger("attack");
-            //set coroutine to wait 
-            chargeAttack();
-        }
-        */
-
-
     }
-
-    //private bool PlayerInSight() {
-    //    RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * -transform.localScale.x * colliderDistance,
-    //        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y,  boxCollider.bounds.size.z),
-    //        0, Vector2.left, 0, playerLayer);
-        
-    //    if (hit.collider != null) {
-    //        playerHealth = hit.transform.GetComponent<PlayerHealth>();
-    //        Debug.Log(gameObject.name);
-    //    }
-    //    return hit.collider != null;
-    //}
-
-    //private void OnDrawGizmos() {
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * -transform.localScale.x * colliderDistance,
-    //        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y,  boxCollider.bounds.size.z));    
-    //}
-
-    //private void DamagePlayer() {
-    //    if (PlayerInSight()) {
-    //        playerHealth.TakeDamage(1);
-    //    }
-    //}
 }
