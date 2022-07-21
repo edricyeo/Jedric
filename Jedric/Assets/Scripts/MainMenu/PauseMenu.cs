@@ -38,6 +38,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void GoToMainRoom() {
+        Resume();
         Debug.Log("Go to main room");
+        SceneManager.LoadScene("MainRoom");
     }
 }
