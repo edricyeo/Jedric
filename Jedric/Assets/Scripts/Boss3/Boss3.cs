@@ -25,9 +25,10 @@ public class Boss3 : EnemyDamage
     private Animator anim;
     private Transform boss3Transform;
     private Transform player;
+    private PlayerHealth playerHealth;
     private RaycastHit2D hit;
     private Vector2 initScale;
-    private enum Attack {MeleeAttack, TripleShot}
+    private enum Attack {MeleeAttack, TripleShot, HomingShot}
     private int nextAttack;
 
     private void Awake()
@@ -36,24 +37,26 @@ public class Boss3 : EnemyDamage
         boss3Transform = GetComponent<Transform>();
         initScale = boss3Transform.localScale;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     private void Update()
     {
         cooldownTimer += Time.deltaTime;
+        if (!player.gameObject.activeSelf)
+            return;
 
         if (cooldownTimer >= attackCooldown)
         {
-            /*
+            nextAttack = Random.Range(0,3);
             if (nextAttack == (int) Attack.MeleeAttack) { 
                 anim.SetTrigger("Teleport");
             } else if (nextAttack == (int) Attack.TripleShot) {
                 anim.SetTrigger("Cast");
+            } else {
+                anim.SetTrigger("CastHoming");
             }
-            */
-            anim.SetTrigger("Cast");
             cooldownTimer = 0;
-            nextAttack = Random.Range(1,2);
         }
     }
 
@@ -82,18 +85,26 @@ public class Boss3 : EnemyDamage
         StartCoroutine(AttackBuffer());
     }
 
+    private void PlaceHomingBolt() {
+        currentBolt = bolts[FindBolt()];
+        currentBolt.transform.position = firepointArray[2].position;
+        currentBolt.GetComponent<Boss3Projectile>().ActivateProjectile();
+        currentBolt.GetComponent<Boss3Projectile>().ToggleHomingProjectile();
+        StartCoroutine(AttackBuffer());
+    }
+
     private IEnumerator AttackBuffer() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < bolts.Length; i++)
         {
             if (bolts[i].activeInHierarchy)
                 bolts[i].GetComponent<Boss3Projectile>().LaunchProjectile();
-            yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1);
         }
     }
 
     private void DealDamage() {
-        if (PlayerInSight()) {
+        if (PlayerInSight() && PlayerHealth.isInvuln == false) {
             if (hit.collider.CompareTag("Player")) {
                 hit.collider.GetComponent<Health>().TakeDamage(1.0f);
             }

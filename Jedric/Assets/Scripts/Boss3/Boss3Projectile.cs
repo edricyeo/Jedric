@@ -14,6 +14,9 @@ public class Boss3Projectile : MonoBehaviour
 
     private bool hit;
     private Transform player;
+    private Vector3 playerPosition;
+    private Vector3 movementVector;
+    private bool homing = false;
 
     private void Awake()
     {
@@ -28,39 +31,53 @@ public class Boss3Projectile : MonoBehaviour
         hit = false;
         gameObject.SetActive(true);
         coll.enabled = true;
+        
         player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    public void ToggleHomingProjectile() {
+        homing = !homing;
     }
 
     public void LaunchProjectile() {
         launched = true;
-        currLifetime = 0;
+
+        if (homing) {
+            currLifetime = 0;
+        } else {
+            movementVector = (player.position - transform.position).normalized * speed;
+        }
     }
 
     private void Update()
     {
         currLifetime += Time.deltaTime;
         if (hit) return;
-        float movementSpeed = speed * Time.deltaTime;
 
-        if (launched) {
+        if (launched && !homing) {
+            transform.position += movementVector * Time.deltaTime;
+        } else if (launched && homing) {
+            float movementSpeed = (speed/3) * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, player.position, movementSpeed);
             if (currLifetime > resetTime) {
                 hit = true;
                 coll.enabled = false;
                 gameObject.SetActive(false);
                 launched = false;
+                homing = false;
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-
         if (collision.CompareTag("Player"))
             collision.GetComponent<Health>().TakeDamage(1);
 
+        hit = true;
+        coll.enabled = false;
         gameObject.SetActive(false);
         launched = false;
+        homing = false;
     }
 }

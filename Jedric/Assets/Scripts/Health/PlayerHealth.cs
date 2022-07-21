@@ -5,6 +5,7 @@ public class PlayerHealth : Health
 {
     private PlayerMovement playerMove;
     private Animator anim;
+    public static bool isInvuln = false;
 
     [Header("Player iFrames")]
     [SerializeField] private float iFramesDuration;
@@ -50,17 +51,20 @@ public class PlayerHealth : Health
         //ignore collision between layer 8 (player) and 9 (enemy)
         Physics2D.IgnoreLayerCollision(8, 9, true);
         Physics2D.IgnoreLayerCollision(8, 12, true);
+        isInvuln = true;
         //invunerability duration
         for (int i = 0; i < numOfFlashes; i++)
         {
             // make the sprite flash red and make it slightly transparent
             spriteRend.color = new Color(1, 0, 0, 0.5f);
-            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
+            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes) * 2);
             spriteRend.color = Color.white;
-            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
+            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes) * 2);
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
         Physics2D.IgnoreLayerCollision(8, 12, false);
+        isInvuln = false;
+
     }
 
 }
