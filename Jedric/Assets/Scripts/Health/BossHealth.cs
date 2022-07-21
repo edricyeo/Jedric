@@ -21,12 +21,7 @@ public class BossHealth : Health
     {
         base.TakeDamage(dmg);
 
-        if (base.currentHealth > 0)
-        {
-            //boss hurt
-            anim.SetTrigger("hurt");
-        }
-        else if (!base.dead)
+        if (!base.dead && base.currentHealth == 0)
         {
             anim.SetTrigger("die");
             gameObject.SetActive(false);

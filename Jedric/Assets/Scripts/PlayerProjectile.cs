@@ -37,7 +37,6 @@ public class PlayerProjectile : MonoBehaviour
         anim.SetTrigger("collide");
 
         // damaging bosses
-        Debug.Log(collision.tag);
         if (collision.CompareTag("Enemy"))
             collision.GetComponent<BossHealth>().TakeDamage(1);
     }

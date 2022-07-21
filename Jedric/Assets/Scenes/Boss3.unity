@@ -6384,7 +6384,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7445782827686927656, guid: ce5181895b4d64fcd88ddcfa2278bd9e, type: 3}
       propertyPath: speed
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7445782827686927659, guid: ce5181895b4d64fcd88ddcfa2278bd9e, type: 3}
       propertyPath: m_Name
@@ -11116,9 +11116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9478124dfe347bbb78abca7893ec2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
+  startingHealth: 50
   currentHealth: 0
   hurtSound: {fileID: 8300000, guid: 416cf5d5778b745fc91be5843ea8596a, type: 3}
+  powerUpInstructions: {fileID: 0}
 --- !u!114 &1994211063
 MonoBehaviour:
   m_ObjectHideFlags: 0

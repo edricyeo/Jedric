@@ -96,7 +96,7 @@ for each firepoint in array
     }
 
     private IEnumerator AttackBuffer() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.8f);
         for (int i = 0; i < bolts.Length; i++)
             if (bolts[i].activeInHierarchy)
                 bolts[i].GetComponent<Boss2Projectile>().LaunchProjectile();

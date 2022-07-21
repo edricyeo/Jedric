@@ -57,9 +57,9 @@ public class PlayerHealth : Health
         {
             // make the sprite flash red and make it slightly transparent
             spriteRend.color = new Color(1, 0, 0, 0.5f);
-            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes) * 2);
+            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
             spriteRend.color = Color.white;
-            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes) * 2);
+            yield return new WaitForSeconds(iFramesDuration / (numOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
         Physics2D.IgnoreLayerCollision(8, 12, false);
