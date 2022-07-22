@@ -926,7 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd75499f4da34615abceb3a02bea064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  sceneName: MainRoom
   portalObject: {fileID: 559896649}
 --- !u!212 &559896652
 SpriteRenderer:

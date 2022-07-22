@@ -15780,21 +15780,9 @@ PrefabInstance:
       propertyPath: postDeathMenu
       value: 
       objectReference: {fileID: 700987094}
-    - target: {fileID: 2919856346368723662, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
-      propertyPath: m_GravityScale
-      value: -30
-      objectReference: {fileID: 0}
     - target: {fileID: 2919856346368723663, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919856346368723664, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919856346368723666, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
-      propertyPath: extraJumps
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2919856346368723667, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
       propertyPath: m_RootOrder
@@ -15880,10 +15868,6 @@ PrefabInstance:
       propertyPath: bullets.Array.data[9]
       value: 
       objectReference: {fileID: 1129400672}
-    - target: {fileID: 2919856347415491754, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.196
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
 --- !u!1001 &3071718307606623050

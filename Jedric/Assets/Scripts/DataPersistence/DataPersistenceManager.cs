@@ -48,6 +48,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        if (dataPersistenceObjects == null)
+        {
+            Debug.Log("dataPersistenceObjects is null");
+        }
         // pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
@@ -59,11 +63,10 @@ public class DataPersistenceManager : MonoBehaviour
     }
 
     // just for testing, should implement this on main menu start button eventually
-    private void Start()
+    public void Start()
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
     }
 
     private void OnApplicationQuit()
