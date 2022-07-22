@@ -4,30 +4,21 @@ using UnityEngine;
 
 public class Boss1 : EnemyDamage
 {
-    [Header ("Attack Parameters")]
-    [SerializeField] private float attackCooldown;
-    [SerializeField] private float range;
+    //[Header ("Attack Parameters")]
+    //[SerializeField] private float attackCooldown;
+    //[SerializeField] private float range;
 
-    [Header ("Collider Parameters")]
-    [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] private float colliderDistance;
+    //[Header ("Collider Parameters")]
+    //[SerializeField] private BoxCollider2D boxCollider;
+    //[SerializeField] private float colliderDistance;
 
-    [Header ("Player Layer")]
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private PlayerLevel player;
+    [Header ("Player Parameters")]
+    [SerializeField] private PlayerDash playerDash;
 
     private void Awake() {
-        //BossHealth.BossDeathEvent += LevelUpPlayer;
+        BossHealth.BossDeathEvent += playerDash.EnableDash;
         BossHealth.BossDeathEvent += IncreaseProgressLevel;
     }
-
-    //private void LevelUpPlayer()
-    //{
-    //    if (player.level == 1)
-    //    {
-    //        player.LevelUp();
-    //    }
-    //}
 
     private void IncreaseProgressLevel()
     {

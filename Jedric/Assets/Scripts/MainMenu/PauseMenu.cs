@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,5 +39,16 @@ public class PauseMenu : MonoBehaviour
         Resume();
         Debug.Log("Go to main room");
         SceneManager.LoadScene("MainRoom");
+    }
+
+    public void GoToMainMenu()
+    {
+        Resume();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

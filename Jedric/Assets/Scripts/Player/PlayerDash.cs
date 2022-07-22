@@ -61,7 +61,7 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    public void ToggleDash()
+    public void EnableDash()
     {
         if (dashEnabled == false)
         {

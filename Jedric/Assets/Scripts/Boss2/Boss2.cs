@@ -21,6 +21,7 @@ public class Boss2 : EnemyDamage
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
+    [SerializeField] private PlayerMovement playerMove;
 
     private enum Attack {ThreeConsec, AlternatingAttack, RainingAttack}
     private int nextAttack;
@@ -33,6 +34,7 @@ public class Boss2 : EnemyDamage
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        BossHealth.BossDeathEvent += playerMove.EnableDoubleJump;
         BossHealth.BossDeathEvent += IncreaseProgressLevel;
     }
 
