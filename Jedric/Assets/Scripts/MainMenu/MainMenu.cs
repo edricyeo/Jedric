@@ -3,9 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayButton()
+    public void NewGameButton()
     {
-        //Load the play scene
+        // Load new play scene
+        DataPersistenceManager.instance.NewGame();
+        SceneManager.LoadScene("Tutorial");
+    }
+    public void LoadGameButton()
+    {
+        //Load previous play scene
+        DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadScene("MainRoom");
     }
 

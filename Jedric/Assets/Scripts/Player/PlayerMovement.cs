@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float wallJumpY;
 
     [Header("Double Jump")]
-    [SerializeField] private int extraJumps;
+    public int extraJumps;
     private int jumpCounter;
 
     [Header("Sounds")]

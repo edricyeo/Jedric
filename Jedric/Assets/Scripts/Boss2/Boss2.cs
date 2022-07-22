@@ -33,6 +33,7 @@ public class Boss2 : EnemyDamage
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        BossHealth.BossDeathEvent += IncreaseProgressLevel;
     }
 
     private void Update()
@@ -142,5 +143,13 @@ code for raining projectiles
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
             new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+    }
+
+    private void IncreaseProgressLevel()
+    {
+        if (GameManager.instance.progressLevel == 1)
+        {
+            GameManager.instance.progressLevel++;
+        }
     }
 }
