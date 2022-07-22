@@ -62,7 +62,6 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.Save(gameData);
     }
 
-    // just for testing, should implement this on main menu start button eventually
     public void Start()
     {
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);

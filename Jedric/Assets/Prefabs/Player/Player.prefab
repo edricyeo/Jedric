@@ -167,7 +167,7 @@ MonoBehaviour:
   wallJumpX: 1800
   wallJumpY: 750
   extraJumps: 0
-  jumpSound: {fileID: 8300000, guid: e0e47eb38c86447f9848b8debde02cf9, type: 3}
+  jumpSound: {fileID: 8300000, guid: 59df8c00f588642279eb950e7e4c92b7, type: 3}
 --- !u!95 &2919856346368723669
 Animator:
   serializedVersion: 4

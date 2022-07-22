@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float wallJumpY;
 
     [Header("Double Jump")]
-    public int extraJumps;
+    [SerializeField] private int extraJumps;
     private int jumpCounter;
 
     [Header("Sounds")]
@@ -108,5 +108,13 @@ public class PlayerMovement : MonoBehaviour
     public bool OnWall()
     {
         return Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(-transform.localScale.x, 0), 0.1f, wallLayer);
+    }
+
+    public void EnableDoubleJump()
+    {
+        if (extraJumps == 0)
+        {
+            extraJumps = 1;
+        }
     }
 }

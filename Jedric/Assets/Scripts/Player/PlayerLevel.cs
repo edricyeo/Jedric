@@ -22,25 +22,25 @@ public class PlayerLevel : MonoBehaviour
     // level 2 -> unlocked dash, second portal open
     // level 3 -> unlocked double jump, third portal open
     // level 4 -> unlocked rifle, last portal open
-    public void LevelUp()
-    {
-        if (level == 1)
-        {
-            playerDash.ToggleDash();
-            level++;
-        }
-        else if (level == 2)
-        {
-            playerMovement.extraJumps = 1;
-            level++;
-        }
-        else if (level == 3)
-        {
-            playerAttack.IncreaseFirerate();
-        }
-        else if (level == 4)
-        {
+    //public void LevelUp()
+    //{
+    //    if (level == 1)
+    //    {
+    //        playerDash.ToggleDash();
+    //        level++;
+    //    }
+    //    else if (level == 2)
+    //    {
+    //        playerMovement.extraJumps = 1;
+    //        level++;
+    //    }
+    //    else if (level == 3)
+    //    {
+    //        playerAttack.IncreaseFirerate();
+    //    }
+    //    else if (level == 4)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }

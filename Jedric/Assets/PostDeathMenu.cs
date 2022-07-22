@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,5 +13,6 @@ public class PostDeathMenu : MonoBehaviour
 
     public void QuitLevel() {
         Debug.Log("Go to main room");
+        SceneManager.LoadScene("MainRoom");
     }
 }
