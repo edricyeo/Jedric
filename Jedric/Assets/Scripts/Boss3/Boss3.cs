@@ -52,7 +52,7 @@ public class Boss3 : EnemyDamage
             if (nextAttack == (int) Attack.MeleeAttack) { 
                 anim.SetTrigger("Teleport");
             } else if (nextAttack == (int) Attack.TripleShot) {
-                anim.SetTrigger("Cast");
+                anim.SetTrigger("CastBoltAttack");
             } else {
                 anim.SetTrigger("CastHoming");
             }
