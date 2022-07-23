@@ -36,7 +36,7 @@ public class PlayerLevel : MonoBehaviour
         }
         else if (level == 3)
         {
-            playerAttack.IncreaseFirerate();
+            //playerAttack.IncreaseFirerate();
         }
         else if (level == 4)
         {
