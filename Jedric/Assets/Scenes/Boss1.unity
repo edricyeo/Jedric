@@ -15887,7 +15887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3071718307606623052, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: startingHealth
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3071718307606623052, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: dashInstructions

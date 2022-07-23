@@ -10,17 +10,13 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
     [SerializeField] private bool dashEnabled = false;
+    [SerializeField] private bool invulnDash = false;
     private float dashDurationTimer;
     private float dashCdTimer;
     public bool isDashing = false;
 
     public ParticleSystem dust;
     [SerializeField] private AudioClip dashSound;
-
-    //private void Start()
-    //{
-    //    BossHealth.BossDeathEvent += ToggleDash;
-    //}
 
     void Update()
     {
@@ -35,6 +31,10 @@ public class PlayerDash : MonoBehaviour
                     playerMove.speed *= dashMultiplier;
                     isDashing = true;
                     dashDurationTimer = dashDuration;
+                    if (invulnDash)
+                    {
+                        StartCoroutine(Invuln());
+                    }
                 }
             }
 
@@ -72,5 +72,15 @@ public class PlayerDash : MonoBehaviour
     public void CreateDust()
     {
         dust.Play();
+    }
+
+    private IEnumerator Invuln()
+    {
+        //ignore collision between player, enemy, enemy projectile
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        Physics2D.IgnoreLayerCollision(8, 12, true);
+        yield return new WaitForSeconds(dashDuration);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+        Physics2D.IgnoreLayerCollision(8, 12, false);
     }
 }

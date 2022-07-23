@@ -45,8 +45,4 @@ public class PlayerAttack : MonoBehaviour
         return 0;
     }
 
-    public void IncreaseFirerate()
-    {
-        this.attackCooldown = 0.15f;
-    }
 }
