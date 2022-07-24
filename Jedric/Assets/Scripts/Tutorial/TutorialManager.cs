@@ -30,20 +30,13 @@ public class TutorialManager : MonoBehaviour
             }
         } else if (popUpIndex == 2)
         {
-            // wall climbing
-            if (player.OnWall() && Input.GetKeyDown(KeyCode.Space))
-            {
-                NextPopUp();
-            }
-        } else if (popUpIndex == 3)
-        {
             // shooting
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 NextPopUp();
                 dummy.gameObject.SetActive(true);
             }
-        } else if (popUpIndex == 4)
+        } else if (popUpIndex == 3)
         {
             // defeating dummy
             if (dummy.currentHealth == 0)

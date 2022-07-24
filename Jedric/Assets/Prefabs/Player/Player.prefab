@@ -163,11 +163,14 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 0
   playerDash: {fileID: 4092490858094838300}
   wallJumpX: 1800
   wallJumpY: 750
   extraJumps: 0
-  jumpSound: {fileID: 8300000, guid: e0e47eb38c86447f9848b8debde02cf9, type: 3}
+  jumpSound: {fileID: 8300000, guid: fd7b008a33a9e4644922970fccf3b518, type: 3}
 --- !u!95 &2919856346368723669
 Animator:
   serializedVersion: 4
