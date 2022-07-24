@@ -29,6 +29,9 @@ public class FlyingBatAttack : MonoBehaviour
 
     private void Update()
     {
+        if (!player.gameObject.activeSelf)
+            return;
+            
         cooldownTimer += Time.deltaTime;
 
         if (cooldownTimer >= attackCooldown)

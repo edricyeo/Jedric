@@ -36,7 +36,10 @@ public class FlyingBatProjectile : MonoBehaviour
 
     private void Update()
     {
-        if (hit) return;
+
+        if (hit) 
+            return;
+            
         transform.position += movementVector * Time.deltaTime; 
     }
 
