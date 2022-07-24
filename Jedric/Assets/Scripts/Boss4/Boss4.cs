@@ -8,8 +8,8 @@ public class Boss4 : EnemyDamage
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
 
-    [Header("Ranged Attack")]
-    [SerializeField] private Transform[] firepointArray;
+    [Header("Boomerang Attack")]
+    [SerializeField] private Transform BoomerangFirepoint;
     [SerializeField] private GameObject[] bolts;
     private GameObject currentBolt;
 
@@ -31,7 +31,7 @@ public class Boss4 : EnemyDamage
     private PlayerHealth playerHealth;
     private RaycastHit2D hit;
     private Vector2 initScale;
-    private enum Attack {ColumnAttack}
+    private enum Attack {ColumnAttack, BoomerangAttack}
     private int nextAttack;
 
     private void Awake()
@@ -51,9 +51,11 @@ public class Boss4 : EnemyDamage
 
         if (cooldownTimer >= attackCooldown)
         {
-            nextAttack = 0;
+            nextAttack = Random.Range(0,2);
             if (nextAttack == (int) Attack.ColumnAttack) { 
                 CastColumnAttack();
+            } else if (nextAttack == (int) Attack.BoomerangAttack) {
+                CastBoomerangAttack();
             }
             cooldownTimer = 0;
         }
@@ -72,55 +74,14 @@ public class Boss4 : EnemyDamage
         }
     }
 
-    private void Teleport() {
-        if (boss3Transform.position.x > player.position.x) {
-            boss3Transform.localScale = new Vector2(Mathf.Abs(initScale.x), initScale.y);
-            boss3Transform.position = new Vector2(player.position.x + 0.8f, boss3Transform.position.y);
-        } else {
-            boss3Transform.localScale = new Vector2(-Mathf.Abs(initScale.x), initScale.y);
-            boss3Transform.position = new Vector2(player.position.x - 0.8f, boss3Transform.position.y);
-        }
-        anim.SetTrigger("Appear");
+    private void CastBoomerangAttack() {
+        anim.SetTrigger("CastBoomerang");
     }
 
-    private void MeleeAttack() {
-        anim.SetTrigger("Attack");
-    }
-
-    private void PlaceBolts() {
-        
-        for (int i = 0; i < firepointArray.Length; i++) {
-            currentBolt = bolts[FindBolt()];
-            currentBolt.transform.position = firepointArray[i].position;
-            currentBolt.GetComponent<Boss3Projectile>().ActivateProjectile();
-        }
-        StartCoroutine(AttackBuffer());
-    }
-
-    private void PlaceHomingBolt() {
+    private void BoomerangAttack() {
         currentBolt = bolts[FindBolt()];
-        currentBolt.transform.position = firepointArray[2].position;
-        currentBolt.GetComponent<Boss3Projectile>().ActivateProjectile();
-        currentBolt.GetComponent<Boss3Projectile>().ToggleHomingProjectile();
-        StartCoroutine(AttackBuffer());
-    }
-
-    private IEnumerator AttackBuffer() {
-        yield return new WaitForSeconds(0.5f);
-        for (int i = 0; i < bolts.Length; i++)
-        {
-            if (bolts[i].activeInHierarchy)
-                bolts[i].GetComponent<Boss3Projectile>().LaunchProjectile();
-                yield return new WaitForSeconds(1);
-        }
-    }
-
-    private void DealDamage() {
-        if (PlayerInSight() && PlayerHealth.isInvuln == false) {
-            if (hit.collider.CompareTag("Player")) {
-                hit.collider.GetComponent<Health>().TakeDamage(1.0f);
-            }
-        }
+        currentBolt.transform.position = BoomerangFirepoint.position;
+        currentBolt.GetComponent<BoomerangProjectile>().ActivateProjectile();
     }
 
     private int FindActiveBolt() {

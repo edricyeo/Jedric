@@ -54,12 +54,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-
+/*
         if (OnWall())
         {
             body.gravityScale = 0;
             body.velocity = Vector2.zero;
         }
+        */
         else 
         {
             body.gravityScale = gravityVal;
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
             } 
         }
 
-        wallJumpCooldown += Time.deltaTime;
+        //wallJumpCooldown += Time.deltaTime;
     }
 
     private void Jump()
@@ -81,10 +82,12 @@ public class PlayerMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
+        /*
         else if (!OnWall() && jumpCounter <= 0)
             return;
         else if (OnWall() && wallJumpCooldown > 0.2f)
             WallJump();
+        */
         else
         {
             // double jump logic

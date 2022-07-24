@@ -55,7 +55,8 @@ public class Boss2 : EnemyDamage
     }
 
     private void LowerAttack()
-    {   currentBolt = bolts[FindBolt()];
+    {   
+        currentBolt = bolts[FindBolt()];
         cooldownTimer = 0;
         currentBolt.transform.position = firepoint1.position;
         currentBolt.GetComponent<Boss2Projectile>().ActivateProjectile();
