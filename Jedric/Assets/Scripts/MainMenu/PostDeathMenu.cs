@@ -15,5 +15,6 @@ public class PostDeathMenu : MonoBehaviour
 
     public void QuitLevel() {
         Debug.Log("Go to main room");
+        SceneManager.LoadScene("MainRoom");
     }
 }

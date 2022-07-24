@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     private void Attack()
     {
         cooldownTimer = 0;
-        //SoundManager.instance.PlaySound(bulletSound);
+        SoundManager.instance.PlaySound(bulletSound);
         anim.SetTrigger("attack");
         // pooling bullets for better performance
         bullets[FindBullet()].transform.position = firePoint.position;
