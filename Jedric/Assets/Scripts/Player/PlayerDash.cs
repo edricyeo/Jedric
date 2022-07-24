@@ -61,7 +61,7 @@ public class PlayerDash : MonoBehaviour
         }
     }
 
-    public void ToggleDash()
+    public void EnableDash()
     {
         if (dashEnabled == false)
         {
@@ -82,5 +82,10 @@ public class PlayerDash : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
         Physics2D.IgnoreLayerCollision(8, 9, false);
         Physics2D.IgnoreLayerCollision(8, 12, false);
+    }
+
+    public void EnableInvulnDash()
+    {
+        invulnDash = true;
     }
 }

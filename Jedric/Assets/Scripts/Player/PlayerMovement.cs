@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private Animator anim;
     private BoxCollider2D boxCollider;
-    private float wallJumpCooldown;
+    //private float wallJumpCooldown;
     private float horizontalInput;
 
     [Header("Player Dash")]
@@ -82,12 +82,10 @@ public class PlayerMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
-        /*
         else if (!OnWall() && jumpCounter <= 0)
             return;
-        else if (OnWall() && wallJumpCooldown > 0.2f)
-            WallJump();
-        */
+        //else if (OnWall() && wallJumpCooldown > 0.2f)
+        //    WallJump();
         else
         {
             // double jump logic
@@ -97,11 +95,11 @@ public class PlayerMovement : MonoBehaviour
         SoundManager.instance.PlaySound(jumpSound);
     }
 
-    private void WallJump()
-    {
-        body.AddForce(new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
-        wallJumpCooldown = 0;
-    }
+    //private void WallJump()
+    //{
+    //    body.AddForce(new Vector2(Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
+    //    wallJumpCooldown = 0;
+    //}
 
     private bool IsGrounded()
     {
@@ -111,5 +109,13 @@ public class PlayerMovement : MonoBehaviour
     public bool OnWall()
     {
         return Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(-transform.localScale.x, 0), 0.1f, wallLayer);
+    }
+
+    public void EnableDoubleJump()
+    {
+        if (extraJumps == 0)
+        {
+            extraJumps = 1;
+        }
     }
 }

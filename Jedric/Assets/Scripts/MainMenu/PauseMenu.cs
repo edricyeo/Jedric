@@ -42,4 +42,15 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Go to main room");
         SceneManager.LoadScene("MainRoom");
     }
+
+    public void GoToMainMenu()
+    {
+        Resume();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

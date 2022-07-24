@@ -17,8 +17,9 @@ public class Boss3 : EnemyDamage
     [SerializeField] private float colliderDistance;
     [SerializeField] private BoxCollider2D boxCollider;
 
-    [Header("Player Layer")]
+    [Header("Player Parameters")]
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private PlayerDash playerDash;
     private float cooldownTimer = Mathf.Infinity;
 
     //References
@@ -38,6 +39,9 @@ public class Boss3 : EnemyDamage
         initScale = boss3Transform.localScale;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        BossHealth.BossDeathEvent += playerDash.EnableInvulnDash;
+        BossHealth.BossDeathEvent += IncreaseProgressLevel;
+
     }
 
     private void Update()
@@ -144,5 +148,13 @@ public class Boss3 : EnemyDamage
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
             new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+    }
+
+    private void IncreaseProgressLevel()
+    {
+        if (GameManager.instance.progressLevel == 2)
+        {
+            GameManager.instance.progressLevel++;
+        }
     }
 }
