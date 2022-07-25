@@ -125,6 +125,9 @@ public class Boss4 : EnemyDamage
 
     private void DeactivateBat()
     {
-        bat.SetActive(false);
+        if (bat != null)
+        {
+            bat.SetActive(false);
+        }
     }
 }

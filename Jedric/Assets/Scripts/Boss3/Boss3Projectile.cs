@@ -51,6 +51,9 @@ public class Boss3Projectile : MonoBehaviour
 
     private void Update()
     {
+        if (!player.gameObject.activeSelf)
+            return;
+
         currLifetime += Time.deltaTime;
         if (hit) return;
 
