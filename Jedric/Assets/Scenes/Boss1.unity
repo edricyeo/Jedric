@@ -15900,9 +15900,13 @@ PrefabInstance:
       propertyPath: playerDash
       value: 
       objectReference: {fileID: 1676695574}
+    - target: {fileID: 3071718307299753557, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
+      propertyPath: attackCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3071718307606623052, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: startingHealth
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3071718307606623052, guid: 115f10d320f404f728c67bb9ad3e0150, type: 3}
       propertyPath: dashInstructions

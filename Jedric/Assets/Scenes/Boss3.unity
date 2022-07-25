@@ -7600,8 +7600,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972664338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.78, y: -1.96, z: -0.13130479}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2581289243990108559}
@@ -7613,8 +7613,8 @@ Transform:
   - {fileID: 748411731}
   - {fileID: 332156258}
   - {fileID: 1874122204}
-  m_Father: {fileID: 1994211067}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016615078
 GameObject:
@@ -10118,7 +10118,7 @@ Transform:
   - {fileID: 222432722}
   - {fileID: 492695722}
   m_Father: {fileID: 1994211067}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1531704892
 PrefabInstance:
@@ -11385,7 +11385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackCooldown: 4
+  attackCooldown: 3
   range: 1.7
   firepointArray:
   - {fileID: 1210976113}
@@ -11517,7 +11517,6 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 972664339}
   - {fileID: 1518249335}
   m_Father: {fileID: 0}
   m_RootOrder: 9

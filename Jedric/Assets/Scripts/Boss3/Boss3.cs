@@ -98,12 +98,12 @@ public class Boss3 : EnemyDamage
     }
 
     private IEnumerator AttackBuffer() {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         for (int i = 0; i < bolts.Length; i++)
         {
             if (bolts[i].activeInHierarchy)
                 bolts[i].GetComponent<Boss3Projectile>().LaunchProjectile();
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.5f);
         }
     }
 
