@@ -24,6 +24,9 @@ public class Boss4 : EnemyDamage
     [Header("Column Attack")]
     [SerializeField] private GameObject[] AttackColumns;
 
+    [Header("Bat Parameters")]
+    [SerializeField] private GameObject bat;
+
     //References
     private Animator anim;
     private Transform boss3Transform;
@@ -41,6 +44,7 @@ public class Boss4 : EnemyDamage
         initScale = boss3Transform.localScale;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        BossHealth.BossDeathEvent += DeactivateBat;
     }
 
     private void Update()
@@ -117,5 +121,10 @@ public class Boss4 : EnemyDamage
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
             new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+    }
+
+    private void DeactivateBat()
+    {
+        bat.SetActive(false);
     }
 }

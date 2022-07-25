@@ -10832,6 +10832,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2919856346368723666, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
+      propertyPath: extraJumps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919856346368723666, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
       propertyPath: platformLayer.m_Bits
       value: 8192
       objectReference: {fileID: 0}
@@ -10930,6 +10934,10 @@ PrefabInstance:
     - target: {fileID: 2919856347415491754, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4092490858094838300, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
+      propertyPath: invulnDash
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4092490858094838300, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}
       propertyPath: dashEnabled
@@ -12459,6 +12467,7 @@ MonoBehaviour:
   - {fileID: 7549952959192872298}
   - {fileID: 1159110029}
   - {fileID: 24289559}
+  bat: {fileID: 1196426842}
 --- !u!114 &2068823400 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 414529121884160350, guid: dc1a882a7468747f1a0d89713a068a54, type: 3}

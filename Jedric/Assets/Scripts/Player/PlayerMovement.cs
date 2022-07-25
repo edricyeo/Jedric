@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
-        else if (!OnWall() && jumpCounter <= 0)
+        else if (jumpCounter <= 0)
             return;
         //else if (OnWall() && wallJumpCooldown > 0.2f)
         //    WallJump();

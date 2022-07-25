@@ -26,15 +26,16 @@ public class PlayerDash : MonoBehaviour
             {
                 if (dashCdTimer <= 0 && dashDurationTimer <= 0)
                 {
+                    if (invulnDash)
+                    {
+                        StartCoroutine(Invuln());
+                    }
                     CreateDust();
                     SoundManager.instance.PlaySound(dashSound);
                     playerMove.speed *= dashMultiplier;
                     isDashing = true;
                     dashDurationTimer = dashDuration;
-                    if (invulnDash)
-                    {
-                        StartCoroutine(Invuln());
-                    }
+                    
                 }
             }
 
@@ -79,7 +80,7 @@ public class PlayerDash : MonoBehaviour
         //ignore collision between player, enemy, enemy projectile
         Physics2D.IgnoreLayerCollision(8, 9, true);
         Physics2D.IgnoreLayerCollision(8, 12, true);
-        yield return new WaitForSeconds(dashDuration);
+        yield return new WaitForSeconds(dashDuration + 0.3f);
         Physics2D.IgnoreLayerCollision(8, 9, false);
         Physics2D.IgnoreLayerCollision(8, 12, false);
     }
